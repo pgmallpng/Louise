@@ -756,6 +756,7 @@
         function openLightbox(imgElement) { lightboxImg.src = imgElement.src; resetZoomAndPan(); lightbox.style.display = 'flex'; lightboxActive = true; document.body.classList.add('lightbox-open'); lightboxImg.onload = () => clampTranslate(); if (lightboxImg.complete) clampTranslate(); }
         function closeLightbox() { lightbox.style.display = 'none'; lightboxActive = false; resetZoomAndPan(); isDragging = false; lightbox.classList.remove('dragging'); document.body.classList.remove('lightbox-open'); }
         window.openLightbox = openLightbox;
+        window.showDetail = showDetail;
         lightboxImg.addEventListener('dblclick', (e) => { e.stopPropagation(); resetZoomAndPan(); clampTranslate(); });
         function startDrag(e) { if (currentZoom <= 1) return; e.preventDefault(); isDragging = true; lightbox.classList.add('dragging'); const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0), clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0); startX = clientX - imgTranslateX; startY = clientY - imgTranslateY; }
         function onDrag(e) { if (!isDragging) return; e.preventDefault(); const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0), clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0); imgTranslateX = clientX - startX; imgTranslateY = clientY - startY; applyTransform(); clampTranslate(); }
@@ -848,7 +849,7 @@
             }
             return `<p><em>⚠️ Contact information not configured. Please contact your manager directly.</em></p><p>If you are an administrator, create a <code>contact-config.js</code> file in the site root with <code>contacts</code> array or legacy <code>telegram/signal</code> fields.</p>`;
         }
-        ARTICLES['contact-manager'] = { title: "📞 Contact Manager", meta: "Direct support for deposit/withdrawal/upgrades", content: buildContactManagerContent() };
+        ARTICLES['contact-manager'] = { title: "Contact Manager", meta: "Direct support for deposit/withdrawal/upgrades", content: buildContactManagerContent() };
 
         const ALL_CARDS = [
             { id: "why-pg-safe", title: "Why Is PG Safe?", desc: "Legal, stable, fund security & verifiable" },
